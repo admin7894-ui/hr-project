@@ -11,5 +11,11 @@
     "seed": "node prisma/seed.js",
     "studio": "cd backend && npx prisma studio --schema=../prisma/schema.prisma"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0"
+  }
 }

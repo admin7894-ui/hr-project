@@ -574,22 +574,23 @@ model Assignment {
 }
 
 model Supervisor {
-  id                    String   @id @default(cuid()) @map("supervisor_id")
-  companyId             String   @map("company_id")
-  bgId                  String   @map("bg_id")
-  assignmentId          String   @map("assignment_id")
-  supervisorPersonId    String   @map("supervisor_person_id")
-  supervisorAssignmentId String  @map("supervisor_assignment_id")
-  activeFlag            Boolean  @default(true) @map("active_flag")
-  effectiveFrom         DateTime @default(now()) @map("effective_from")
-  effectiveTo           DateTime @default(dbgenerated("'2099-12-31'::date")) @map("effective_to")
-  createdBy             String   @default("SYSTEM") @map("created_by")
-  createdAt             DateTime @default(now()) @map("created_at")
+  id                     String   @id @default(cuid()) @map("supervisor_id")
+  companyId              String   @map("company_id")
+  bgId                   String   @map("bg_id")
+  assignmentId           String   @map("assignment_id")
+  personId               String   @map("person_id")
+  supervisorPersonId     String   @map("supervisor_person_id")
+  supervisorAssignmentId String   @map("supervisor_assignment_id")
+  activeFlag             Boolean  @default(true) @map("active_flag")
+  effectiveFrom          DateTime @default(now()) @map("effective_from")
+  effectiveTo            DateTime @default(dbgenerated("'2099-12-31'::date")) @map("effective_to")
+  createdBy              String   @default("SYSTEM") @map("created_by")
+  createdAt              DateTime @default(now()) @map("created_at")
 
   assignment           Assignment @relation(fields: [assignmentId], references: [id])
+  person               Person     @relation(fields: [personId], references: [id])
   supervisorPerson     Person     @relation("SupervisorPerson", fields: [supervisorPersonId], references: [id])
   supervisorAssignment Assignment @relation("SupervisorAssignment", fields: [supervisorAssignmentId], references: [id])
-  person               Person     @relation(fields: [supervisorPersonId], references: [id])
 
   @@map("supervisors")
 }
